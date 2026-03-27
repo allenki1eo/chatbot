@@ -1,6 +1,6 @@
 -- ============================================================
--- WhatsApp Order Bot — Supabase Schema
--- Run this in your Supabase project: SQL Editor → New Query
+-- WhatsApp Order Bot — Database Schema
+-- Paste and run this in your SQL editor (Supabase / Kapso / any Postgres)
 -- ============================================================
 
 -- Orders table
@@ -9,7 +9,8 @@ CREATE TABLE IF NOT EXISTS public.orders (
   order_number       TEXT        UNIQUE NOT NULL,
   customer_name      TEXT        NOT NULL,
   customer_phone     TEXT        NOT NULL,
-  product_details    TEXT        NOT NULL,
+  products           TEXT        NOT NULL,
+  total_items        INTEGER     NOT NULL DEFAULT 1,
   delivery_address   TEXT        NOT NULL,
   status             TEXT        NOT NULL DEFAULT 'pending'
                      CHECK (status IN ('pending','confirmed','processing','shipped','delivered','cancelled')),

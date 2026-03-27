@@ -6,16 +6,23 @@ import { createOrder } from "@/lib/orders";
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
-    const { customer_name, customer_phone, product_details, delivery_address, notes } = body;
+    const { customer_name, customer_phone, products, total_items, delivery_address, notes } = body;
 
-    if (!customer_name || !customer_phone || !product_details || !delivery_address) {
+    if (!customer_name || !customer_phone || !products || !delivery_address) {
       return NextResponse.json(
-        { success: false, error: "Missing required fields: customer_name, customer_phone, product_details, delivery_address" },
+        { success: false, error: "Missing required fields: customer_name, customer_phone, products, delivery_address" },
         { status: 400 }
       );
     }
 
-    const order = await createOrder({ customer_name, customer_phone, product_details, delivery_address, notes });
+    const order = await createOrder({
+      customer_name,
+      customer_phone,
+      products,
+      total_items: Number(total_items) || 1,
+      delivery_address,
+      notes,
+    });
 
     return NextResponse.json(
       {

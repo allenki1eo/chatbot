@@ -30,7 +30,8 @@ async function uniqueOrderNumber(): Promise<string> {
 export async function createOrder(payload: {
   customer_name: string;
   customer_phone: string;
-  product_details: string;
+  products: string;
+  total_items: number;
   delivery_address: string;
   notes?: string;
 }): Promise<Order> {
@@ -43,7 +44,8 @@ export async function createOrder(payload: {
       order_number,
       customer_name: payload.customer_name,
       customer_phone: phone,
-      product_details: payload.product_details,
+      products: payload.products,
+      total_items: payload.total_items,
       delivery_address: payload.delivery_address,
       notes: payload.notes ?? null,
       status: "pending",

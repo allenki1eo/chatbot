@@ -11,7 +11,8 @@ export interface Order {
   order_number: string;
   customer_name: string;
   customer_phone: string;
-  product_details: string;
+  products: string;
+  total_items: number;
   delivery_address: string;
   status: OrderStatus;
   notes: string | null;
